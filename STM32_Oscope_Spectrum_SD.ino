@@ -1,11 +1,11 @@
 /*
  * STM32 Digital Oscilloscope
- * using the STM32F103C8 MCU and the ILI9341 320x240 TFT display 
+ * using the STM32F103C8 MCU and the ILI9341 320x240 TFT display
  * https://www.gameinstance.com/post/80/STM32-Oscilloscope-with-FFT-and-SD-export
- * 
+ *
  *  GameInstance.com
  *  2016-2018
- * 
+ *
  * Updates by Me
  *  - Changed to leverage rotary encoder
  *  - SDCard disabled by default
@@ -368,7 +368,7 @@ enum TOP_MENU {
   MENU_TRIGALIGN = 3,
   MENU_FREEZE = 4,
   MENU_SIZE
-}; // 
+}; //
 #define NUM_ENC_MODES MENU_SIZE
 const char* encModes[NUM_ENC_MODES] = { "Time Base", "Trig Mode", "Trig Volt", "Trig Align", "Freeze" };
 void actTimeBase() {
@@ -383,7 +383,7 @@ void actTimeBase() {
 
 void actInputCheck() {
   if (!encoderCount && !encoderClick) return; // skip when no buttons pressed
-  bTitleChange = true;  
+  bTitleChange = true;
   if (encoderClick && !encDepth) {
     encDepth++;
     encoderClick = false;
@@ -449,7 +449,7 @@ uint16_t newTrigger() {
       if (firstEdge < 0 && data16[i] < trigVolt) firstEdge = i;
     } else { // FALLING
       if (firstEdge >= 0 && data16[i] < trigVolt) newStart = i;
-      if (firstEdge < 0 && data16[i] > trigVolt) firstEdge = i;      
+      if (firstEdge < 0 && data16[i] > trigVolt) firstEdge = i;
     }
   }
   return newStart;
@@ -562,11 +562,11 @@ void actDrawSignals() {
     }
     avgy /= SCREEN_HORIZONTAL_RESOLUTION;
     for (i = leftStart, j = 0; j < SCREEN_HORIZONTAL_RESOLUTION; i++, j += h) {
-      uint16_t base = i - leftStart; 
+      uint16_t base = i - leftStart;
       bk[base] = SCREEN_VERTICAL_RESOLUTION - (20 + (data16[i] * ADC_SCREEN_FACTOR));
       bk[base + 1] = SCREEN_VERTICAL_RESOLUTION - (20 + (data16[i + 1] * ADC_SCREEN_FACTOR));
       tft.drawLine(j, bk[base], j + h, bk[base + 1], CH1_SIGNAL_COLOR);
-      if (h > 1) 
+      if (h > 1)
         tft.drawPixel(j, bk[base] - 1, GREEN);
     }
     // clear previous stats
@@ -631,7 +631,7 @@ void actDrawTitleBar() {
     tft.setCursor(215, 3);
     if (encDepth)
       tft.setTextColor(RED);
-    else 
+    else
       tft.setTextColor(BLUE);
     tft.setTextSize(1);
     tft.print(encModes[encSetting]);
