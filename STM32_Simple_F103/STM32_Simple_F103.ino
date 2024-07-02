@@ -1,1 +1,1 @@
-STM32_Oscope_Spectrum_SD.ino
+../STM32_Oscope_Spectrum_SD.ino
