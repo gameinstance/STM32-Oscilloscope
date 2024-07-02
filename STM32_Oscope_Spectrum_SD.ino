@@ -20,10 +20,6 @@
 #define TFT_CS      PA1
 #define TFT_RST     PA2
 #define TFT_LED     PA3 // Backlight
-// PA4 = NSS
-// PA5 = SCK1
-// PA6 = MISO
-// PA7 = MOSI
 
 #define ENC_BUTTON PB7
 #define ENC_CLK PB8
@@ -444,7 +440,7 @@ void actAcquisition() {
 uint32_t fpsLatest = 0;
 uint16_t leftStart = 0;
 uint16_t newTrigger() {
-  if (trigger != TRIG_FALLING && trigger != TRIG_RISING) return 0;
+  if (trigger != TRIG_FALLING && trigger != TRIG_RISING) return 1;
   uint16_t newStart = 0;
   int16_t firstEdge = -1;
   for (i = trigAlign; i < BUFFER_SIZE-SCREEN_HORIZONTAL_RESOLUTION && newStart == 0; i++) {
